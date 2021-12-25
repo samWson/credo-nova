@@ -9,6 +9,7 @@
     "main": "main.js",
 
     "activationEvents": [
+        "onWorkspaceContains:mix.exs",
         "onLanguage:elixir"
     ],
 

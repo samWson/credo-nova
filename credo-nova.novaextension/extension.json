@@ -3,7 +3,7 @@
     "name": "credo-nova",
     "organization": "Samuel Wilson",
     "description": "Static code analysis by Credo for Elixir in the Nova editor.",
-    "version": "0.0.1",
+    "version": "2021.12.27",
     "categories": ["issues"],
 
     "main": "main.js",

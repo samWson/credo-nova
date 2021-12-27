@@ -4,6 +4,7 @@
     "organization": "Samuel Wilson",
     "description": "Static code analysis by Credo for Elixir in the Nova editor.",
     "version": "2021.12.27",
+    "license": "BSD-3-Clause",
     "categories": ["issues"],
 
     "main": "main.js",

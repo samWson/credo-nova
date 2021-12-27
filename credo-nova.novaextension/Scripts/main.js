@@ -66,9 +66,7 @@ class CredoProcess {
      * Prepares the interface with the Credo shell command.
      * @param {String} baseCommand - The shell command used to invoke Credo, as specified by the user's preferences.
      */
-    // constructor(baseCommand) {
     constructor() {
-        // this.command = this.sanitizeCommand(baseCommand);
         this.processOptions = {
             cwd: nova.workspace.path,
             shell: true
@@ -148,40 +146,18 @@ class CredoProcess {
             console.error(`Credo Nova Extension ERROR: ${error}`);
         });
     }
-
-    /**
-     * Cleans and formats the user-supplied base command string for use in Nova's Process class.
-     * @param {String} command - The command used to invoke Credo, as specified in the user's preferences.
-     * @return {Array} - An array of words used to invoke Credo, without command arguments or flags.
-     */
-     // sanitizeCommand(command) {
-     //    // Strip command arguments/flags from the
-     // }
-
 }
 
 /** Primary interface for interacting with Credo from within Nova. */
 class Credo {
     constructor() {
-        // this.baseCommand = this.getConfig("samuel-wilson.credo-nova.base-command");
         this.issueCollection = new IssueCollection();
-        // this.process = new CredoProcess(this.baseCommand);
         this.process = new CredoProcess();
     }
 
     provideIssues(editor) {
         const file = editor.document.path;
         const novaIssues = [];
-
-        // Create a new issue
-//         let issue = new Issue();
-//
-//         issue.message = "Invalid syntax: Missing semicolon";
-//         issue.severity = IssueSeverity.Warning;
-//         issue.line = 4;
-//         issue.column = 0;
-//
-//         issues.push(issue);
 
         this.process.inspect(file).then((issues) => {
             issues.forEach(issue => {

@@ -46,8 +46,6 @@ To configure global preferences, open **Extensions → Extension Library...** th
 
 You can also configure preferences on a per-project basis in **Project → Project Settings...**
 
-<!--
-👋 That's it! Happy developing!
+## Acknowledgments
 
-P.S. If you'd like, you can remove these comments before submitting your extension 😉
--->
+[SeriouslyAwesome](https://github.com/SeriouslyAwesome) whose Nova extension I referenced heavily when writing this extension, [rubocop-nova](https://github.com/SeriouslyAwesome/rubocop-nova).

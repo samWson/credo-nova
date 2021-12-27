@@ -40,6 +40,8 @@ class CredoIssue {
         issue.column = this.column;
         issue.endLine= this.line_no;
         issue.endColumn= this.column_end;
+
+        return issue;
     }
 
     /**
@@ -73,7 +75,7 @@ class CredoProcess {
         }
     }
 
-    async inspect(file) {
+    inspect(file) {
         return new Promise(resolve => {
             this.run(file, this.generateIssues, resolve);
         });
@@ -169,7 +171,7 @@ class Credo {
 
     provideIssues(editor) {
         const file = editor.document.path;
-        let novaIssues = [];
+        const novaIssues = [];
 
         // Create a new issue
 //         let issue = new Issue();
@@ -182,7 +184,7 @@ class Credo {
 //         issues.push(issue);
 
         this.process.inspect(file).then((issues) => {
-            novaIssues.forEach(issue => {
+            issues.forEach(issue => {
                 novaIssues.push(issue.toNovaIssue());
             });
 
@@ -193,7 +195,7 @@ class Credo {
 
         editor.onDidDestroy(destroyedEditor => {
             // Check to see if the same file is open in another tab first
-            let editorWithSameFile = nova.workspace.textEditors.find(editor => {
+            const editorWithSameFile = nova.workspace.textEditors.find(editor => {
                 return editor.document.uri === destroyedEditor.document.uri;
             });
 

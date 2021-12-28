@@ -125,6 +125,7 @@ class CredoProcess {
             const data = JSON.parse(output);
 
             this.issues = data.issues.map(issue => new CredoIssue(issue));
+            console.info(this._reportIssuesReceived());
 
             return this.issues;
         } catch(error) {
@@ -146,6 +147,21 @@ class CredoProcess {
             console.error(`Credo Nova Extension ERROR: ${error}`);
         });
     }
+
+    _reportIssuesReceived() {
+        const total = this.issues.length;
+        const priorityOne = this.issues.filter(issue => issue['priority'] === 1).length;
+        const priorityTwo = this.issues.filter(issue => issue['priority'] === 2).length;
+        const priorityThree = this.issues.filter(issue => issue['priority'] === 3).length;
+        const priorityFour = this.issues.filter(issue => issue['priority'] === 4).length;
+
+        return `Received ${total} issues from Credo:
+priority\t| total
+1\t\t| ${priorityOne}
+2\t\t| ${priorityTwo}
+3\t\t| ${priorityThree}
+4\t\t| ${priorityFour}`;
+    }
 }
 
 /** Primary interface for interacting with Credo from within Nova. */
@@ -164,6 +180,7 @@ class Credo {
                 novaIssues.push(issue.toNovaIssue());
             });
 
+            console.info(this._reportIssuesProvided(novaIssues));
             this.issueCollection.set(editor.document.uri, novaIssues);
 
             return novaIssues;
@@ -190,6 +207,21 @@ class Credo {
         const extensionConfig = nova.config.get(name);
 
         return workspaceConfig === null ? extensionConfig : workspaceConfig;
+    }
+
+    _reportIssuesProvided(issues) {
+        const total = issues.length;
+        const error = issues.filter(issue => issue.severity === IssueSeverity.Error).length;
+        const warning = issues.filter(issue => issue.severity === IssueSeverity.Warning).length;
+        const hint = issues.filter(issue => issue.severity === IssueSeverity.Hint).length;
+        const info = issues.filter(issue => issue.severity === IssueSeverity.Info).length;
+
+        return `Credo-Nova provided ${total} issues:
+severity\t| total
+Error\t| ${error}
+Warning\t| ${warning}
+Hint\t\t| ${hint}
+Info\t\t| ${info}`;
     }
 }
 

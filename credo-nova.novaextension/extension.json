@@ -6,6 +6,7 @@
     "version": "2021.12.27",
     "license": "BSD-3-Clause",
     "categories": ["issues"],
+    "bugs": "https://github.com/samWson/credo-nova/issues",
 
     "main": "main.js",
 

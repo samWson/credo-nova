@@ -22,29 +22,23 @@ Let's get started!
 
 ## Requirements
 
-<!--
-🎈 If your extension depends on external processes or tools that users will need to have, it's helpful to list those and provide links to their installers:
--->
+credo-nova requires [Credo](https://hexdocs.pm/credo/installation.html) to be added as a `mix` dependancy.
 
-credo-nova requires some additional tools to be installed on your Mac:
+Add `:credo` as a dependancy to your project's `mix.exs`:
 
-- [Node.js 8.2.0](https://nodejs.org) and NPM 5.2.0 or newer
+```elixir
+defp deps do
+  [
+	{:credo, "~> 1.6", only: [:dev, :test], runtime: false}
+  ]
+end
+```
 
-<!--
-✨ Providing tips, tricks, or other guides for installing or configuring external dependencies can go a long way toward helping your users have a good setup experience:
--->
+And run:
 
-> To install the current stable version of Node, click the "Recommended for Most Users" button to begin the download. When that completes, double-click the **.pkg** installer to begin installation.
-
-### Configuration
-
-<!--
-🎈 If your extension offers global- or workspace-scoped preferences, consider pointing users toward those settings. For example:
--->
-
-To configure global preferences, open **Extensions → Extension Library...** then select credo-nova's **Preferences** tab.
-
-You can also configure preferences on a per-project basis in **Project → Project Settings...**
+```shell
+$ mix deps.get
+```
 
 ## License
 

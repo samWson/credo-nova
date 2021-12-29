@@ -1,12 +1,3 @@
-
-exports.activate = function() {
-    // Do work when the extension is activated
-}
-
-exports.deactivate = function() {
-    // Clean up state before the extension is deactivated
-}
-
 /** Maps JSON output from Credo into instances of the Issue class provided by Nova. */
 class CredoIssue {
     /**
@@ -62,17 +53,6 @@ class CredoIssue {
 
 /** Provides the main interface for invoking Credo from within Nova. */
 class CredoProcess {
-    /**
-     * Prepares the interface with the Credo shell command.
-     * @param {String} baseCommand - The shell command used to invoke Credo, as specified by the user's preferences.
-     */
-    constructor() {
-        this.processOptions = {
-            cwd: nova.workspace.path,
-            shell: true
-        }
-    }
-
     inspect(file) {
         return new Promise(resolve => {
             this.run(file, this.generateIssues, resolve);
@@ -194,19 +174,6 @@ class Credo {
 
             if (!editorWithSameFile) this.issueCollection.remove(destroyedEditor.document.uri);
         });
-    }
-
-    /**
-     * Fetches user preferences from Nova, with workspace preferences taking
-     * priority over general extension preferences.
-     * @param {String} name - The name of the configuration setting to retrieve, as labelled in ./configuration-options.json.
-     * @return {(String | Boolean)} - The value of the user preference from Nova.
-     */
-    getConfig(name) {
-        const workspaceConfig = nova.workspace.config.get(name) ? nova.workspace.config.get(name) : null;
-        const extensionConfig = nova.config.get(name);
-
-        return workspaceConfig === null ? extensionConfig : workspaceConfig;
     }
 
     _reportIssuesProvided(issues) {

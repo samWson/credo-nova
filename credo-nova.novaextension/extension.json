@@ -17,8 +17,5 @@
 
     "entitlements": {
         "process": true
-    },
-
-    "config": "configuration-options.json",
-    "configWorkspace": "configuration-options.json"
+    }
 }
